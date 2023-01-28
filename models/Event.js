@@ -2,13 +2,16 @@
 const mongoose = require('mongoose')
 
 const EventSchema = new mongoose.Schema({
-  host: String,
-  userID: String,
+  
   location: String,
   date: String,
   time: String,
   gameTitle: String,
   details: String,
+  host: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   rsvp: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
