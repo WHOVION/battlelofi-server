@@ -2,10 +2,11 @@
 const mongoose = require('mongoose')
 
 const EventSchema = new mongoose.Schema({
-  
+  name: String,
   location: String,
   date: String,
   time: String,
+  timezone: String,
   gameTitle: String,
   details: String,
   host: [{
