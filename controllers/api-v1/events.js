@@ -49,6 +49,28 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.post('/:id', async(req, res)=> {
+    try {
+        const foundUser= await db.User.findOne({
+            _id: req.body.id
+        })
+
+        const foundEvent= await db.Event.findOne({
+            _id: req.body.event
+        })
+
+        foundUser.events.push(foundEvent._id)
+        foundEvent.rsvp.push(foundUser._id)
+
+        await foundUser.save()
+        await foundEvent.save()
+
+        console.log(foundUser, foundEvent)
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ msg: 'Interval Server Error, Contact the System Administrator' })
+    }
+})
 
 router.put('/:id', async (req, res) => {
     try {
