@@ -9,10 +9,10 @@ const EventSchema = new mongoose.Schema({
   timezone: String,
   gameTitle: String,
   details: String,
-  host: [{
+  host: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }],
+  },
   rsvp: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

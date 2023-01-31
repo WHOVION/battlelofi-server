@@ -10,6 +10,14 @@ router.get('/', (req, res) => {
   res.json({ msg: 'welcome to the users endpoint' })
 })
 
+// router.get('/details/:id', async (req, res) => {
+//   try{
+//     console.log('hi')
+//   }catch(err){
+//     console.log(err)
+//   }
+// })
+
 // POST /users/register - CREATE new user
 router.post('/register', async (req, res) => {
   try {
@@ -90,10 +98,13 @@ router.post('/login', async (req, res) => {
 
 
 // GET /auth-locked - will redirect if bad jwt token is found
-router.get('/auth-locked', authLockedRoute, (req, res) => {
+router.get('/auth-locked', authLockedRoute, async (req, res) => {
   // we know that if we made it here, the res.locals contains an authorized user
-  console.log('this user has been authorized:', res.locals.user)
-  res.json( { msg: 'welcome to the private route!' })
+  const foundUser = await db.User.findOne({
+    id: res.locals._id
+  })
+  console.log('foundUser',foundUser)
+  res.json(foundUser)
 })
 
 module.exports = router

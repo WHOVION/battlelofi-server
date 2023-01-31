@@ -18,14 +18,15 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         // look up a event using the id from the request parameters
-        const event = await db.Event.findById(req.params.id)
+        const details = await db.Event.findById(req.params.id).populate('host')
+        
         // if the bounty is not found, respond with 404
-        if (!event) {
+        if (!details) {
             res.status(404).json({ msg: "not found" })
             return // don't want to send headers twice, stop the function
         }
         // respond with the event we found
-        res.json(event)
+        res.json(details)
     } catch (err) {
         console.log(err)
         if (err.kind === "ObjectId") {
@@ -70,13 +71,23 @@ router.post('/:id', async(req, res)=> {
             _id: req.body.event
         })
 
-        foundUser.events.push(foundEvent._id)
-        foundEvent.rsvp.push(foundUser._id)
+        const foundHost= await db.User.findOne({
+            _id: foundEvent.host
+        })
+        console.log(`|${foundEvent.host._id}||${foundUser._id}|`)
+        if(foundEvent.rsvp.includes(foundUser._id)){
+            console.log('already rsvp\'d to this event')
+            res.json({msg: 'already rsvp\'d to this event'})
+            } else {
+                foundUser.events.push(foundEvent._id)
+                foundEvent.rsvp.push(foundUser._id)
+    
+                await foundUser.save()
+                await foundEvent.save()
 
-        await foundUser.save()
-        await foundEvent.save()
+        }
 
-        console.log(foundUser, foundEvent)
+        
     } catch (err) {
         console.log(err)
         res.status(500).json({ msg: 'Interval Server Error, Contact the System Administrator' })
