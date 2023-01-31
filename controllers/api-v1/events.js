@@ -74,8 +74,14 @@ router.post('/:id', async(req, res)=> {
         const foundHost= await db.User.findOne({
             _id: foundEvent.host
         })
+
         console.log(`|${foundEvent.host._id}||${foundUser._id}|`)
-        if(foundEvent.rsvp.includes(foundUser._id)){
+        console.log(typeof foundEvent.host._id)
+        console.log(typeof foundUser._id)
+        if(foundUser._id.equals(foundEvent.host._id)){
+            console.log('host of the enent')
+            res.json({msg: 'host of the event'})
+        } else if(foundEvent.rsvp.includes(foundUser._id)){
             console.log('already rsvp\'d to this event')
             res.json({msg: 'already rsvp\'d to this event'})
             } else {

@@ -3,14 +3,14 @@ let db = require('./models')
 const postCRUD = async () => { 
     try {
         const newUser = await db.User.findOne({
-            name: 'qw'
+            name: 'pk4'
         }).populate('host')
         
         
 
 
         const newEvent = await db.Event.create({
-            name: 'CoD',
+            name: 'test CoD',
             location: 'new york',
             date: 'tomorrow',
             time: '6pm',
