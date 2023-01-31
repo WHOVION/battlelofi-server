@@ -3,7 +3,7 @@ let db = require('./models')
 const postCRUD = async () => { 
     try {
         const newUser = await db.User.findOne({
-            name: 'qw'
+            name: 'zx'
         }).populate('host')
         
         
