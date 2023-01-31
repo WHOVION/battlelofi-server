@@ -3,20 +3,20 @@ let db = require('./models')
 const postCRUD = async () => { 
     try {
         const newUser = await db.User.findOne({
-            name: 'paul'
+            name: 'qw'
         }).populate('host')
         
         
 
 
         const newEvent = await db.Event.create({
-            name: 'event test',
-            location: 'test friends house',
-            date: 'test next week',
-            time: 'test 3pm',
-            timezone: 'test pst',
-            gameTitle: 'test smashbros',
-            details: 'test friendly kickback event'
+            name: 'CoD',
+            location: 'new york',
+            date: 'tomorrow',
+            time: '6pm',
+            timezone: 'pst',
+            gameTitle: 'smashbros',
+            details: 'friendly kickback event'
         })
 
 
