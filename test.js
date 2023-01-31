@@ -10,7 +10,7 @@ const postCRUD = async () => {
 
 
         const newEvent = await db.Event.create({
-            name: 'CoD',
+            name: 'test CoD',
             location: 'new york',
             date: 'tomorrow',
             time: '6pm',

@@ -101,7 +101,7 @@ router.post('/login', async (req, res) => {
 router.get('/auth-locked', authLockedRoute, async (req, res) => {
   // we know that if we made it here, the res.locals contains an authorized user
   const foundUser = await db.User.findOne({
-    id: res.locals._id
+    _id: res.locals.user._id
   })
   console.log('foundUser',foundUser)
   res.json(foundUser)
