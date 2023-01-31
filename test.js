@@ -10,13 +10,13 @@ const postCRUD = async () => {
 
 
         const newEvent = await db.Event.create({
-            name: 'My event',
-            location: 'my house',
-            date: 'tomorrow',
-            time: '5pm',
-            timezone: 'pst',
-            gameTitle: 'smashbros',
-            details: 'friendly kickback event'
+            name: 'event test',
+            location: 'test friends house',
+            date: 'test next week',
+            time: 'test 3pm',
+            timezone: 'test pst',
+            gameTitle: 'test smashbros',
+            details: 'test friendly kickback event'
         })
 
 
