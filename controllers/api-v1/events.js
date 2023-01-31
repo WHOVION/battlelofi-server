@@ -64,11 +64,9 @@ router.post('/:id', async(req, res)=> {
             _id: foundEvent.host
         })
         console.log(`|${foundEvent.host._id}||${foundUser._id}|`)
-        if(foundEvent.host._id === foundUser._id){
-            console.log('you are the host')
-        } 
         if(foundEvent.rsvp.includes(foundUser._id)){
             console.log('already rsvp\'d to this event')
+            res.json({msg: 'already rsvp\'d to this event'})
             } else {
                 foundUser.events.push(foundEvent._id)
                 foundEvent.rsvp.push(foundUser._id)
