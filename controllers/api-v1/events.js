@@ -125,6 +125,19 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
+        const foundUsers = await db.User.find({})
+        console.log('before change', foundUsers)
+        foundUsers.forEach(user => {
+            if(user.events.includes(req.params.id)){
+                const index= user.events.indexOf(req.params.id)
+                const newEvents= user.events.splice(index, 1)
+                user.save()
+            }
+        })
+        console.log('what i want', foundUsers)
+        // await db.User.updateMany(, {event: user.events}, {new: true})
+        
+        
         // get the id from the url, and destroy that id
         const deletedEvent = await db.Event.findByIdAndDelete(req.params.id)
         if (!deletedEvent) {
