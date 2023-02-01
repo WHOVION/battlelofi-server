@@ -138,11 +138,11 @@ router.delete('/:id', async (req, res) => {
         
         
         // get the id from the url, and destroy that id
-        // const deletedEvent = await db.Event.findByIdAndDelete(req.params.id)
-        // if (!deletedEvent) {
-        //     res.status(404).json({ msg: "not found" })
-        //     return // don't want to send headers twice, stop the function
-        // }
+        const deletedEvent = await db.Event.findByIdAndDelete(req.params.id)
+        if (!deletedEvent) {
+            res.status(404).json({ msg: "not found" })
+            return // don't want to send headers twice, stop the function
+        }
         // send a status of 204 (no content) and nothing else
         res.sendStatus(204)
     } catch (err) {
