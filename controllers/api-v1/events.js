@@ -41,7 +41,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         // add a new event to the db, based on the req.body
-        console.log(req.body)
+        // console.log(req.body)
         const event = await db.Event.create({
             name: req.body.name,
             location: req.body.location,
@@ -50,8 +50,9 @@ router.post('/', async (req, res) => {
             timezone: req.body.timezone,
             gameTitle: req.body.gameTitle,
             details: req.body.details, 
-            // host: req.User._id 
+            host: req.body.host
         }) 
+        console.log(req.body)
         //maybe add push if we keep it as an array
         // either redirect to where the client can find the new event OR send back the new event
         res.status(201).json(event)
